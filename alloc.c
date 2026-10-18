@@ -40,7 +40,7 @@ void
 free_page(void *physical_addr){
 	struct run *r;
 
-	if (((uint64_t)physical_addr % PGSIZE) != 0){
+	if (((uint64_t)physical_addr % PAGE_SIZE) != 0){
                 panic("free_page: physical address not aligned!");
         }
 

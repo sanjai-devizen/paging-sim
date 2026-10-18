@@ -22,8 +22,8 @@ extern struct free_mem_struct free_memory;
 #define PAGE_SIZE  4096 
 #define PGSHIFT 12   
 
-#define PGROUNDUP(sz)  (((sz) + PGSIZE - 1) & ~(PGSIZE - 1))
-#define PGROUNDDOWN(a) (((a)) & ~(PGSIZE - 1))
+#define PGROUNDUP(sz)  (((sz) + PAGE_SIZE - 1) & ~(PAGE_SIZE - 1))
+#define PGROUNDDOWN(a) (((a)) & ~(PAGE_SIZE - 1))
 
 #define PTE_V (1L << 0) 
 #define PTE_R (1L << 1)
@@ -41,7 +41,7 @@ extern struct free_mem_struct free_memory;
 #define PXSHIFT(level) (PGSHIFT + (9 * (level)))
 #define PX(level, va)  ((((uint64_t)(va)) >> PXSHIFT(level)) & PXMASK)
 
-#define MAXVA (1L << (9 + 9 + 9 + 12 - 1))
+#define MAX_VA (1L << (9 + 9 + 9 + 12 - 1))
 
 typedef uint64_t *pagetable_t;
 typedef uint64_t pte_t;

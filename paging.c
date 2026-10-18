@@ -17,7 +17,7 @@ init_paging(void){
 	return core_pagetable;
 }
 
-int
+pagetable_t
 walk(pagetable_t pagetable, uint64_t virtual_addr, int alloc_perm){
 	if (virtual_addr >= MAX_VA){
 		panic("walk: exceeded virtual address limit !");
@@ -29,10 +29,10 @@ walk(pagetable_t pagetable, uint64_t virtual_addr, int alloc_perm){
 		if (*pte & PTE_V){
 			pagetable = (pagetable_t)PTE_TO_PA(*pte);
 		} else {
-			if (!(alloc_perm) || (pagetable = (pde_t *)alloc_page()) == 0){
+			if (!(alloc_perm) || (pagetable = (pte_t *)alloc_page()) == 0){
 				return 0;
 			}
-
+			
 			memset(pagetable, 0, PAGE_SIZE);
 
 			*pte = PA_TO_PTE(pagetable) | PTE_V; 
