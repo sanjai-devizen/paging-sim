@@ -10,7 +10,7 @@ init_page_table(void){
 
 pagetable_t
 init_paging(void){
-	core_pagetable = alloc();
+	core_pagetable = (pagetable_t)alloc_page();
 
 	memset(core_pagetable, 0, PAGE_SIZE);
 
@@ -103,9 +103,4 @@ map_pages(pagetable_t pagetable, uint64_t virtual_addr, uint64_t size, uint64_t 
 	}
 
 	return 0;
-}
-
-uint64_t
-handle_page_fault(){
-
 }

@@ -4,4 +4,5 @@
 void
 panic(char *message){
 	printf("\npanic: %s", message);
+	exit(1);
 }

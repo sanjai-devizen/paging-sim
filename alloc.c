@@ -2,6 +2,9 @@
 #include <stdlib.h>
 #include "defs.h"
 
+uint8_t *custom_ram;
+struct free_mem_struct free_memory;
+
 void
 init_physical_ram(void){
 	custom_ram = (uint8_t *)malloc(RAM_SIZE);
@@ -37,9 +40,9 @@ void
 free_page(void *physical_addr){
 	struct run *r;
 
-	if ((uint64_t)physical_addr != 0 || (uint64_t) >= PHY_STOP){
-		panic("free_page: physical address invalid or out of range !");
-	}
+	if (((uint64_t)physical_addr % PGSIZE) != 0){
+                panic("free_page: physical address not aligned!");
+        }
 
 	// filling page with junk.
 	memset(physical_addr, 1, PAGE_SIZE);
