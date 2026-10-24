@@ -41,8 +41,8 @@ free_page(void *physical_addr){
 	struct run *r;
 
 	if (((uint64_t)physical_addr % PAGE_SIZE) != 0){
-                panic("free_page: physical address not aligned!");
-        }
+        panic("free_page: physical address not aligned!");
+    }
 
 	// filling page with junk.
 	memset(physical_addr, 1, PAGE_SIZE);
@@ -52,7 +52,6 @@ free_page(void *physical_addr){
 	r->next = free_memory.free_list;
 	free_memory.free_list = r;
 }	
-
 
 void *
 memset(void *addr, char c, int n){
